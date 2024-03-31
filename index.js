@@ -10,6 +10,7 @@ const bcrypt = require("bcrypt");
 const helmet = require("helmet");
 const compression = require("compression");
 const rateLimit = require("express-rate-limit");
+const cors = require("cors");
 require("dotenv").config();
 
 // Routes
@@ -40,7 +41,8 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", "views");
 
-// app.use(helmet());
+app.use(helmet());
+app.use(cors());
 app.use(compression());
 app.use(limiter);
 app.use(bodyParser.urlencoded({ extended: false }));
