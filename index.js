@@ -6,7 +6,6 @@ const mongoose = require("mongoose");
 const csurf = require("csurf");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const multer = require("multer");
 const bcrypt = require("bcrypt");
 const helmet = require("helmet");
 const compression = require("compression");
@@ -30,39 +29,6 @@ const limiter = rateLimit({
   message: "Too many requests. Please try again in a few minutes.",
 });
 
-const storage = multer.diskStorage({
-  //multers disk storage settings
-  destination: function (req, file, cb) {
-    cb(null, "./public/uploads/images/news");
-  },
-  filename: function (req, file, cb) {
-    const datetimestamp = Date.now();
-    cb(
-      null,
-      file.fieldname +
-        "-" +
-        datetimestamp +
-        "." +
-        file.originalname.split(".")[file.originalname.split(".").length - 1]
-    );
-  },
-});
-
-const upload = multer({
-  //multer settings
-  storage: storage,
-  fileFilter: function (req, file, callback) {
-    var ext = path.extname(file.originalname);
-    if (ext !== ".png" && ext !== ".jpg" && ext !== ".jpeg") {
-      return callback(new Error("Only images are allowed"));
-    }
-    callback(null, true);
-  },
-  limits: {
-    fileSize: 1920 * 1080,
-  },
-}).single("image");
-
 const csrfProtection = csurf();
 const store = new MongoDBStore({
   uri: MONGO_URI,
@@ -78,7 +44,6 @@ app.use(helmet());
 app.use(compression());
 app.use(limiter);
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(upload);
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
