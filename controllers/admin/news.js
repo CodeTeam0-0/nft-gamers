@@ -80,8 +80,8 @@ exports.getEditNews = async function (req, res, next) {
     }
 
     return res.render("admin/edit-news", {
-      csrfToken: req.csrfToken(),
       news,
+      csrfToken: req.csrfToken(),
     });
   } catch (err) {
     next(err);
