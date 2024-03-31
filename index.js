@@ -49,6 +49,7 @@ app.use(
       "img-src": ["'self'", "*"],
       "media-src": ["'self'", "*"],
       "script-src": ["'self'", "*"],
+      "frame-src": ["'self'", "*"],
     },
   })
 );
