@@ -42,7 +42,15 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 
 app.use(helmet());
-app.use(helmet({ contentSecurityPolicy: false }));
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+      "img-src": ["'self'", "*"],
+      mediaSrc: ["'self'", "*"],
+    },
+  })
+);
 app.use(cors());
 app.use(compression());
 app.use(limiter);
