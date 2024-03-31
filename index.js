@@ -44,6 +44,16 @@ app.set("views", "views");
 app.use(helmet());
 app.use(
   helmet({
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        "img-src": ["'self'", "lh3.google.com"],
+      },
+    },
+  })
+);
+app.use(
+  helmet({
     crossOriginEmbedderPolicy: false,
     crossOriginOpenerPolicy: true,
   })
