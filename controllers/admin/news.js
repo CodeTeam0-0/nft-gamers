@@ -21,9 +21,7 @@ exports.postAddNews = async function (req, res, next) {
     const title = req.body.title;
     const description = req.body.description;
 
-    imageUrl = `https://drive.google.com/uc?export=view&id=${
-      imageUrl.split("/")[5]
-    }`;
+    imageUrl = `https://lh3.google.com/u/0/d/${imageUrl.split("/")[5]}`;
 
     const news = new New({
       title,
@@ -120,7 +118,7 @@ exports.postEditNews = async function (req, res, next) {
 
     news.title = title;
     news.description = description;
-    news.imageUrl = imageUrl;
+    news.imageUrl = `https://lh3.google.com/u/0/d/${imageUrl.split("/")[5]}`;
 
     await news.save();
     return res.redirect("/admin/news-manage");
