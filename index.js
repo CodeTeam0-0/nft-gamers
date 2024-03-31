@@ -41,6 +41,8 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", "views");
 
+app.use(helmet());
+app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors());
 app.use(compression());
 app.use(limiter);
