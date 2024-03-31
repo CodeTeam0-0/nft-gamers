@@ -17,9 +17,13 @@ exports.getAddNews = function (req, res, next) {
 
 exports.postAddNews = async function (req, res, next) {
   try {
-    const imageUrl = req.body.image;
+    let imageUrl = req.body.image;
     const title = req.body.title;
     const description = req.body.description;
+
+    imageUrl = `https://drive.google.com/uc?export=view&id=${
+      imageUrl.split("/")[5]
+    }`;
 
     const news = new New({
       title,
