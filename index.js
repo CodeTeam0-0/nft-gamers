@@ -46,8 +46,9 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-      imgSrc: ["'self'", "*"],
-      mediaSrc: ["'self'", "*"],
+      "img-src": ["'self'", "*"],
+      "media-src": ["'self'", "*"],
+      "script-src": ["'self'", "*"],
     },
   })
 );
