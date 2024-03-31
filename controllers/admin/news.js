@@ -56,22 +56,6 @@ exports.postDeleteNews = async function (req, res, next) {
       return res.redirect("/admin/news-manage");
     }
 
-    fs.unlink(
-      path.join(
-        __dirname,
-        "..",
-        "..",
-        "public",
-        "uploads",
-        "images",
-        "news",
-        news.imageUrl
-      ),
-      (err) => {
-        if (err) return next(err);
-      }
-    );
-
     if (req.user?.bestNews?.toString() === news._id.toString()) {
       const user = await User.findById(req.user._id);
 

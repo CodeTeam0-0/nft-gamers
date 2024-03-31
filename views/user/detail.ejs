@@ -40,11 +40,7 @@
       <p id="description" class="mt-3"><%- airdrop.description %></p>
       <% } else { %>
       <h1><%= news.title %></h1>
-      <img
-        class="w-100"
-        src="/uploads/images/news/<%= news.imageUrl %>"
-        alt="news.png"
-      />
+      <img class="w-100" src="<%= news.imageUrl %>" alt="news.png" />
       <small>Updated on <%= news.updatedAt.toLocaleDateString() %></small>
       <p><%- news.description %></p>
       <% } %>
