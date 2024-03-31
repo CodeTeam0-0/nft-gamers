@@ -30,7 +30,6 @@ const limiter = rateLimit({
   message: "Too many requests. Please try again in a few minutes.",
 });
 
-const csrfProtection = csurf();
 const store = new MongoDBStore({
   uri: MONGO_URI,
   collection: "sessions",
@@ -67,7 +66,6 @@ app.use(
     store: store,
   })
 );
-app.use(csrfProtection);
 
 // Check the user is logging in or not
 const checkLoggedIn = async function (req, res, next) {
@@ -105,7 +103,6 @@ app.use("/admin", adminRoutes);
 app.use((req, res, next) => {
   return res.render("error/404", {
     title: "404 not found",
-    csrfToken: req.csrfToken(),
   });
 });
 

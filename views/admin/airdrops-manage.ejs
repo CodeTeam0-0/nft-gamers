@@ -24,7 +24,6 @@
               <button class="navbar-brand btn btn-light" type="submit">
                 Home
               </button>
-              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
             </form>
           </li>
           <li class="nav-item">
@@ -68,7 +67,6 @@
           <div class="col-md-1">
             <form action="/admin/delete-airdrop" method="post">
               <button class="btn" type="submit">❌</button>
-              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
               <input
                 type="hidden"
                 name="airdropId"
@@ -82,7 +80,6 @@
               <button class="btn" type="submit">
                 <%= airdrops[i].isDone ? '✅' : '❎' %>
               </button>
-              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
               <input
                 type="hidden"
                 name="airdropId"

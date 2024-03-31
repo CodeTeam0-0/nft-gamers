@@ -4,9 +4,7 @@ const Game = require("../../models/games");
 
 exports.getAddGames = function (req, res, next) {
   try {
-    return res.render("admin/add-games", {
-      csrfToken: req.csrfToken(),
-    });
+    return res.render("admin/add-games", {});
   } catch (err) {
     next(err);
   }
@@ -44,7 +42,6 @@ exports.getGamesManage = async function (req, res, next) {
   try {
     const games = await Game.find();
     return res.render("admin/games-manage", {
-      csrfToken: req.csrfToken(),
       games,
     });
   } catch (err) {
@@ -58,7 +55,6 @@ exports.getEditGame = async function (req, res, next) {
     const game = await Game.findById(gameId);
 
     return res.render("admin/edit-game", {
-      csrfToken: req.csrfToken(),
       game,
     });
   } catch (err) {

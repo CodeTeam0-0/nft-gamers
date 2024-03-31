@@ -8,7 +8,6 @@ exports.getAddNews = function (req, res, next) {
   try {
     res.render("admin/add-news", {
       title: "Add News",
-      csrfToken: req.csrfToken(),
     });
   } catch (err) {
     next(err);
@@ -40,7 +39,6 @@ exports.getNewsManager = async function (req, res, next) {
   try {
     const news = await New.find();
     return res.render("admin/news-manage.ejs", {
-      csrfToken: req.csrfToken(),
       news,
     });
   } catch (err) {
@@ -81,7 +79,6 @@ exports.getEditNews = async function (req, res, next) {
 
     return res.render("admin/edit-news", {
       news,
-      csrfToken: req.csrfToken(),
     });
   } catch (err) {
     next(err);

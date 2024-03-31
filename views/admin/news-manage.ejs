@@ -23,7 +23,6 @@
               <button class="navbar-brand btn btn-light" type="submit">
                 Home
               </button>
-              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
             </form>
           </li>
           <li class="nav-item">
@@ -65,14 +64,12 @@
           <div class="col-md-1">
             <form action="/admin/delete-news" method="post">
               <button class="btn" type="submit">❌</button>
-              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
               <input type="hidden" name="newsId" value="<%= news[i]._id %>" />
             </form>
           </div>
           <div class="col-md-1">
             <form action="/admin/best" method="post">
               <button class="btn" type="submit">👍</button>
-              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
               <input type="hidden" name="newsId" value="<%= news[i]._id %>" />
             </form>
           </div>

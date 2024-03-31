@@ -4,9 +4,7 @@ const Airdrop = require("../../models/airdrops");
 
 exports.getAddAirdrop = function (req, res, next) {
   try {
-    return res.render("admin/add-airdrops", {
-      csrfToken: req.csrfToken(),
-    });
+    return res.render("admin/add-airdrops", {});
   } catch (err) {
     next(err);
   }
@@ -44,7 +42,6 @@ exports.getAirdropManage = async function (req, res, next) {
     const airdrops = await Airdrop.find();
 
     return res.render("admin/airdrops-manage", {
-      csrfToken: req.csrfToken(),
       airdrops,
     });
   } catch (err) {
@@ -66,7 +63,6 @@ exports.getEditAirdrop = async function (req, res, next) {
     }
 
     return res.render("admin/edit-airdrop", {
-      csrfToken: req.csrfToken(),
       airdrop,
     });
   } catch (err) {
