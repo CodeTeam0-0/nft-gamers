@@ -44,12 +44,8 @@ app.set("views", "views");
 app.use(helmet());
 app.use(
   helmet({
-    contentSecurityPolicy: {
-      directives: {
-        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-        "img-src": ["'self'", "drive.google.com"],
-      },
-    },
+    crossOriginEmbedderPolicy: false,
+    crossOriginOpenerPolicy: true,
   })
 );
 app.use(cors());
