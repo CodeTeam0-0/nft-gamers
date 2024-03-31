@@ -243,7 +243,7 @@
             <a href=<%= `/game/${games[i]._id}` %> style="text-decoration: none"
               ><div class="row mb-2 text-dark">
                 <div class="col-1"><p style="font-size: 1.5rem;"><%= i + 1 %></p></div>
-                <div class="col-2">
+                <div class="d-none d-lg-block col-2">
                   <img
                     class="rounded-3"
                     src="<%= games[i].imageUrl %>"
@@ -296,7 +296,7 @@
             <a href=<%= `/airdrop/${airdrops[i]._id}` %> style="text-decoration: none"
               ><div class="row mb-2 text-dark">
                 <div class="col-1"><p style="font-size: 1.5rem;">1</p></div>
-                <div class="col-2">
+                <div class="d-none d-lg-block col-2">
                   <img
                     class="rounded-3"
                     src="<%= airdrops[i].imageUrl %>"
