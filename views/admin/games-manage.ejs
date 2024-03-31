@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Games Management</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <div class="container">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" id="navId" role="tablist">
+          <li class="nav-item">
+            <form action="/logout" method="post">
+              <button class="navbar-brand btn btn-light" type="submit">
+                Home
+              </button>
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            </form>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/add-news">Add News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/news-manage">Manage News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/add-games">Add Game</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/games-manage">Manage Game</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/add-airdrops">Add Airdrop</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/airdrops-manage">Manage Airdrop</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Web Code Here -->
+    <div class="container shadow-lg p-5 mt-5 rounded-5">
+      <h1 class="text-center my-5">Games Management</h1>
+
+      <% for(let i = 0;i < games.length; i++) { %>
+      <!-- news component -->
+      <div class="shadow-lg p-3 mb-4 rounded-3">
+        <div class="row">
+          <div class="col-md-10">
+            <p class="h4"><%= games[i].title %></p>
+          </div>
+          <div class="col-md-1">
+            <a class="btn" href="/admin/edit-game/<%= games[i]._id %>">✏️</a>
+          </div>
+          <div class="col-md-1">
+            <form action="/admin/delete-game" method="post">
+              <button class="btn" type="submit">❌</button>
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <input type="hidden" name="gameId" value="<%= games[i]._id %>" />
+            </form>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="/assets/js/bootstrap.min.js"></script>
+  </body>
+</html>

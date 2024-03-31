@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Edit</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <div class="container">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" id="navId" role="tablist">
+          <li class="nav-item">
+            <form action="/logout" method="post">
+              <button class="navbar-brand btn btn-light" type="submit">
+                Home
+              </button>
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            </form>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/add-news">Add News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/news-manage">Manage News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/add-games">Add Game</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/games-manage">Manage Game</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/add-airdrops">Add Airdrop</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/airdrops-manage">Manage Airdrop</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Web Code Here -->
+    <div class="container rounded-5 mt-5 shadow-lg p-5">
+      <h1 class="h1 text-center mb-5">Edit News</h1>
+      <form
+        id="form-input"
+        action="/admin/edit-news"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="title" class="form-label">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="title"
+              name="title"
+              value="<%= news.title %>"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" class="form-control" id="image" name="image" />
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea
+            class="form-control"
+            name="description"
+            id="description"
+            rows="5"
+          >
+<%= news.description %></textarea
+          >
+        </div>
+        <button type="submit" class="btn btn-dark w-100">Submit</button>
+        <input type="hidden" name="newsId" value="<%= news.id %>" />
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      </form>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="/assets/js/bootstrap.min.js"></script>
+  </body>
+</html>

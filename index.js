@@ -1,0 +1,164 @@
+const express = require("express");
+const path = require("path");
+const session = require("express-session");
+const MongoDBStore = require("connect-mongodb-session")(session);
+const mongoose = require("mongoose");
+const csurf = require("csurf");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const multer = require("multer");
+const bcrypt = require("bcrypt");
+const helmet = require("helmet");
+const compression = require("compression");
+const rateLimit = require("express-rate-limit");
+require("dotenv").config();
+
+// Routes
+const authRoutes = require("./routes/auth/auth");
+const adminRoutes = require("./routes/admin/admin");
+const userRoutes = require("./routes/user/user");
+
+const MONGO_URI =
+  "mongodb+srv://teamcode:teamcode@code.1gxvbjo.mongodb.net/nft_game";
+
+const User = require("./models/user");
+
+const limiter = rateLimit({
+  // Limit requests (100 req / 3 mins) per user.
+  windowMs: 3 * 60 * 1000,
+  max: 100,
+  message: "Too many requests. Please try again in a few minutes.",
+});
+
+const storage = multer.diskStorage({
+  //multers disk storage settings
+  destination: function (req, file, cb) {
+    cb(null, "./public/uploads/images/news");
+  },
+  filename: function (req, file, cb) {
+    const datetimestamp = Date.now();
+    cb(
+      null,
+      file.fieldname +
+        "-" +
+        datetimestamp +
+        "." +
+        file.originalname.split(".")[file.originalname.split(".").length - 1]
+    );
+  },
+});
+
+const upload = multer({
+  //multer settings
+  storage: storage,
+  fileFilter: function (req, file, callback) {
+    var ext = path.extname(file.originalname);
+    if (ext !== ".png" && ext !== ".jpg" && ext !== ".jpeg") {
+      return callback(new Error("Only images are allowed"));
+    }
+    callback(null, true);
+  },
+  limits: {
+    fileSize: 1920 * 1080,
+  },
+}).single("image");
+
+const csrfProtection = csurf();
+const store = new MongoDBStore({
+  uri: MONGO_URI,
+  collection: "sessions",
+});
+
+const app = express();
+
+app.set("view engine", "ejs");
+app.set("views", "views");
+
+app.use(helmet());
+app.use(compression());
+app.use(limiter);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(upload);
+app.use(express.static(path.join(__dirname, "public")));
+app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+  })
+);
+app.use(csrfProtection);
+
+// Check the user is logging in or not
+const checkLoggedIn = async function (req, res, next) {
+  if (new Date(req.session.expires) > new Date()) {
+    await req.session.destroy();
+  }
+  const userId = req.session.userId;
+  try {
+    if (userId) {
+      const user = await User.findById(userId);
+      if (!user) {
+        await req.session.destroy();
+      } else {
+        req.user = user;
+      }
+    }
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
+
+app.use(checkLoggedIn);
+
+// Route for Authentication
+app.use(authRoutes);
+
+// Route for user
+app.use(userRoutes);
+
+// Route for admin
+app.use("/admin", adminRoutes);
+
+// 404 Error Middleware
+app.use((req, res, next) => {
+  return res.render("error/404", {
+    title: "404 not found",
+    csrfToken: req.csrfToken(),
+  });
+});
+
+// 500 Server Error middleware
+app.use((error, req, res, next) => {
+  console.log(error);
+  res.render("error/500", {
+    title: "500 Server Error",
+    errorMessage: error.message,
+  });
+});
+
+async function startServer() {
+  try {
+    await mongoose.connect(MONGO_URI);
+    let user = await User.findOne();
+    if (!user) {
+      const hashPassword = await bcrypt.hash(process.env.PASS, 12);
+      user = new User({
+        email: process.env.USER,
+        password: hashPassword,
+      });
+    }
+    await user.save();
+    console.log("Database Connect Successfully!");
+    app.listen(3000, () => {
+      console.log("Server are listen at port: http://localhost:3000");
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+startServer();
