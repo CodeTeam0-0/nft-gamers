@@ -40,7 +40,7 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", "views");
 
-app.use(helmet());
+// app.use(helmet());
 app.use(compression());
 app.use(limiter);
 app.use(bodyParser.urlencoded({ extended: false }));
