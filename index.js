@@ -25,8 +25,8 @@ const User = require("./models/user");
 
 const limiter = rateLimit({
   // Limit requests (100 req / 3 mins) per user.
-  windowMs: 3 * 60 * 1000,
-  max: 100,
+  windowMs: 1 * 60 * 1000,
+  max: 1000,
   message: "Too many requests. Please try again in a few minutes.",
 });
 
