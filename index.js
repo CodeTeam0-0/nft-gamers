@@ -42,6 +42,16 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 
 app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        "img-src": ["'self'", "drive.google.com"],
+      },
+    },
+  })
+);
 app.use(cors());
 app.use(compression());
 app.use(limiter);
