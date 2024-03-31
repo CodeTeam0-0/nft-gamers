@@ -4,6 +4,7 @@
   "description": "NFT Gamer for customers",
   "main": "index.js",
   "scripts": {
+    "run": "node index.js",
     "dev": "nodemon index.js"
   },
   "keywords": [],
