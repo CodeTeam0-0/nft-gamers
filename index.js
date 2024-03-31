@@ -48,7 +48,7 @@ app.use(
       ...helmet.contentSecurityPolicy.getDefaultDirectives(),
       "img-src": ["'self'", "*"],
       mediaSrc: ["'self'", "*"],
-      script-src: ["'self'", "*"],
+      scriptSrc: ["'self'", "*"],
     },
   })
 );
