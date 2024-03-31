@@ -120,7 +120,7 @@
                       <img
                         class="w-100 h-100 rounded-5"
                         style="object-fit: cover; transform: skewX(-6deg)"
-                        src=<%= bestNews ? '/uploads/images/news/' + bestNews.imageUrl : "assets/images/sample.jpg" %>
+                        src=<%= bestNews ? bestNews.imageUrl : "assets/images/sample.jpg" %>
                         alt=""
                       />
                     </div>
@@ -159,7 +159,7 @@
                   <a class="d-block position-relative mb-4" href=<%= `/news/${news[0]._id}` %>>
                     <img
                       class="w-100 rounded-4"
-                      src=<%=`/uploads/images/news/${news[0].imageUrl}`  %>
+                      src=<%= news[0].imageUrl  %>
                       alt="sample.jpg"
                     />
                     <div
@@ -203,7 +203,7 @@
                         <img
                           class="w-100 rounded-5 shadow-sm"
                           style="height: 6rem"
-                          src=<%= `/uploads/images/news/${news[i].imageUrl}` %>
+                          src=<%= news[i].imageUrl %>
                           alt="sample.jpg"
                         />
                       </div>
