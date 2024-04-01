@@ -67,5 +67,35 @@
       integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
       crossorigin="anonymous"
     ></script>
+    <script>
+      // Function to check if user is logged in to Google
+      function checkGoogleLogin() {
+        gapi.load("auth2", function () {
+          gapi.auth2.init().then(function () {
+            var auth2 = gapi.auth2.getAuthInstance();
+            if (auth2.isSignedIn.get()) {
+              // User is already signed in, continue using the page
+              console.log("User is signed in.");
+            } else {
+              // User is not signed in, redirect to Google login page
+              window.location.href = "https://accounts.google.com/";
+            }
+          });
+        });
+      }
+
+      // Load Google API client library
+      (function () {
+        var script = document.createElement("script");
+        script.src = "https://apis.google.com/js/platform.js";
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+        script.onload = function () {
+          // Once Google API client library is loaded, check login status
+          checkGoogleLogin();
+        };
+      })();
+    </script>
   </body>
 </html>
