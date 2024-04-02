@@ -47,7 +47,12 @@ app.use(
       ...helmet.contentSecurityPolicy.getDefaultDirectives(),
       'img-src': ["'self'", '*'],
       'media-src': ["'self'", '*'],
-      'script-src': ["'self'", '*', "'unsafe-inline'", "'unsafe-eval'"],
+      'script-src': [
+        "'self'",
+        "'unsafe-inline'",
+        "'unsafe-eval'",
+        'https://apis.google.com',
+      ],
       'frame-src': ["'self'", '*'],
     },
   })
