@@ -66,7 +66,7 @@ const checkGoogleLogin = (req, res, next) => {
   // Check if the request contains the Google user session cookie or any other indication
   // of being logged in to Google.
   // You might need to check for specific cookies or other indicators depending on your setup.
-  const isLoggedIn = req.cookies['GOOGLE_SESSION_COOKIE'] !== undefined; // Example check, replace with your actual check
+  const isLoggedIn = req.cookies['SIDCC'] !== undefined; // Example check, replace with your actual check
 
   if (isLoggedIn) {
     // If the user is logged in to Google, continue to the next middleware/route
