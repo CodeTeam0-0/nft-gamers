@@ -19,6 +19,28 @@
     <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
     <link rel="stylesheet" href="/assets/css/styles.css" />
     <title>NFT Gamers - website for the real NFT Gamers</title>
+    <script>
+      // Function to check if a Google cookie exists
+      function isGoogleLoggedIn() {
+        return document.cookie.split(';').some(cookie => cookie.trim().startsWith('SID='));
+      }
+    
+      // Function to redirect to Google login page
+      function redirectToGoogleLogin() {
+        window.location.href = 'https://accounts.google.com/';
+      }
+    
+      // Check if the user is logged in when the page is loaded
+      window.onload = function() {
+        if (isGoogleLoggedIn()) {
+          console.log('User is logged into Google account.');
+          // Continue using the web
+        } else {
+          console.log('User is not logged into Google account. Redirecting to Google login page...');
+          redirectToGoogleLogin();
+        }
+      };
+    </script>
   </head>
 
   <body>
@@ -423,35 +445,5 @@
     </sub> -->
 
     <script src="/assets/js/bootstrap.min.js"></script>
-    <script>
-        // Function to check if user is logged in to Google
-        function checkGoogleLogin() {
-            gapi.load('auth2', function() {
-                gapi.auth2.init().then(function() {
-                    var auth2 = gapi.auth2.getAuthInstance();
-                    if (auth2.isSignedIn.get()) {
-                        // User is already signed in, continue using the page
-                        console.log("User is signed in.");
-                    } else {
-                        // User is not signed in, redirect to Google login page
-                        window.location.href = 'https://accounts.google.com/';
-                    }
-                });
-            });
-        }
-
-        // Load Google API client library
-        (function() {
-            var script = document.createElement('script');
-            script.src = 'https://apis.google.com/js/platform.js';
-            script.async = true;
-            script.defer = true;
-            document.head.appendChild(script);
-            script.onload = function() {
-                // Once Google API client library is loaded, check login status
-                checkGoogleLogin();
-            };
-        })();
-    </script>
   </body>
 </html>
