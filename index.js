@@ -61,6 +61,28 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  // Check if the request contains the 'cookie' header
+  if (req.headers.cookie) {
+    // Split the cookie string into individual cookies
+    const cookies = req.headers.cookie.split(';');
+    // Check each cookie to see if it starts with 'SID='
+    const isGoogleLoggedIn = cookies.some((cookie) =>
+      cookie.trim().startsWith('SID=')
+    );
+    // If the Google cookie is found, allow the user to continue
+    if (isGoogleLoggedIn) {
+      next(); // Proceed to the next middleware or route handler
+    } else {
+      // If the Google cookie is not found, redirect to Google account login page
+      res.redirect('https://accounts.google.com/');
+    }
+  } else {
+    // If the 'cookie' header is not present, redirect to Google account login page
+    res.redirect('https://accounts.google.com/');
+  }
+});
+
 app.use(cors());
 app.use(compression());
 app.use(limiter);
