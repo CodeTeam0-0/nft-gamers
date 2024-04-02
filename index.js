@@ -54,7 +54,7 @@ app.use(
       defaultSrc: ["'self'"],
       imgSrc: ["'self'", '*'],
       mediaSrc: ["'self'", '*'],
-      scriptSrc: ["'self'", 'https://apis.google.com'],
+      scriptSrc: ["'self'", '*'],
       scriptSrcElem: ["'self'", `'unsafe-inline'`, `'nonce-${nonce}'`],
       frameSrc: ["'self'", '*'],
     },

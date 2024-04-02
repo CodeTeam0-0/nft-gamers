@@ -26,39 +26,20 @@
     />
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
     <title><%= title %></title>
-    <script>
-      // Function to check if a Google cookie exists
-      function isGoogleLoggedIn() {
-        return document.cookie
-          .split(';')
-          .some((cookie) => cookie.trim().startsWith('SID='));
-      }
-
-      // Function to redirect to Google login page
-      function redirectToGoogleLogin() {
-        window.location.href = 'https://accounts.google.com/';
-      }
-
-      // Check if the user is logged in when the page is loaded
-      window.onload = function () {
-        if (isGoogleLoggedIn()) {
-          console.log('User is logged into Google account.');
-          // Continue using the web
-        } else {
-          console.log(
-            'User is not logged into Google account. Redirecting to Google login page...'
-          );
-          redirectToGoogleLogin();
-        }
-      };
-    </script>
   </head>
   <body>
     <nav class="navbar bg-body-tertiary">
       <div class="container">
-        <div class="container">
-          <a href="/" class="navbar-brand btn btn-light" type="submit">Home</a>
-        </div>
+        <a href="/" class="navbar-brand btn btn-light">Home</a>
+        <button class="ms-5 btn btn-light" onclick="checkGoogleLogin()">
+          Check Google Login
+        </button>
+
+        <script>
+          function checkGoogleLogin() {
+            window.location.href = 'https://accounts.google.com/';
+          }
+        </script>
       </div>
     </nav>
     <div class="container mt-5">

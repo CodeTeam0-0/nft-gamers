@@ -19,28 +19,6 @@
     <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
     <link rel="stylesheet" href="/assets/css/styles.css" />
     <title>NFT Gamers - website for the real NFT Gamers</title>
-    <script>
-      // Function to check if a Google cookie exists
-      function isGoogleLoggedIn() {
-        return document.cookie.split(';').some(cookie => cookie.trim().startsWith('SID='));
-      }
-    
-      // Function to redirect to Google login page
-      function redirectToGoogleLogin() {
-        window.location.href = 'https://accounts.google.com/';
-      }
-    
-      // Check if the user is logged in when the page is loaded
-      window.onload = function() {
-        if (isGoogleLoggedIn()) {
-          console.log('User is logged into Google account.');
-          // Continue using the web
-        } else {
-          console.log('User is not logged into Google account. Redirecting to Google login page...');
-          redirectToGoogleLogin();
-        }
-      };
-    </script>
   </head>
 
   <body>
@@ -76,6 +54,15 @@
                 class="navbar-brand btn bg-white rounded-5 shadow-sm px-3"
                 >Login</a
               >
+              <a class="navbar-brand btn bg-white rounded-5 shadow-sm px-3" onclick="checkGoogleLogin()">
+                Check Google Login
+              </a>
+      
+              <script>
+                function checkGoogleLogin() {
+                  window.location.href = 'https://accounts.google.com/';
+                }
+              </script>
             </div>
           </nav>
 
@@ -144,7 +131,7 @@
                         class="w-100 h-100 rounded-5"
                         style="object-fit: cover; transform: skewX(-6deg)"
                         src=<%= bestNews ? bestNews.imageUrl : "assets/images/sample.jpg" %>
-                        alt=""
+                        alt="Please login google to see images"
                       />
                     </div>
                   </div>
@@ -183,7 +170,7 @@
                     <img
                       class="w-100 rounded-4"
                       src=<%= news[0].imageUrl  %>
-                      alt="sample.jpg"
+                      alt="Please login google to see images"
                     />
                     <div
                       class="w-100 position-absolute bottom-0 text-bg-light p-2 opacity-50"
@@ -227,7 +214,7 @@
                           class="w-100 rounded-5 shadow-sm"
                           style="height: 6rem"
                           src=<%= news[i].imageUrl %>
-                          alt="sample.jpg"
+                          alt="Please login google to see images"
                         />
                       </div>
                     </div>
