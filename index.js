@@ -52,6 +52,7 @@ app.use(
         "'unsafe-inline'",
         "'unsafe-eval'",
         'https://apis.google.com',
+        '*',
       ],
       'frame-src': ["'self'", '*'],
     },
