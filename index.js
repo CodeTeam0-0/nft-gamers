@@ -40,7 +40,13 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
+// Generate a random nonce
+const nonce = crypto.randomBytes(16).toString('base64');
+
+// Use Helmet middleware to set various HTTP headers for security
 app.use(helmet());
+
+// Set Content Security Policy (CSP) using Helmet
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
@@ -48,7 +54,7 @@ app.use(
       imgSrc: ["'self'", '*'],
       mediaSrc: ["'self'", '*'],
       scriptSrc: ["'self'", 'https://apis.google.com'],
-      scriptSrcElem: ["'self'", 'unsafe-inline'],
+      scriptSrcElem: ["'self'", `'unsafe-inline'`, `'nonce-${nonce}'`],
       frameSrc: ["'self'", '*'],
     },
   })
