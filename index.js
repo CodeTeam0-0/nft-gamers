@@ -44,12 +44,12 @@ app.use(helmet());
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-      'img-src': ["'self'", '*'],
-      'media-src': ["'self'", '*'],
+      defaultSrc: ["'self'"],
+      imgSrc: ["'self'", '*'],
+      mediaSrc: ["'self'", '*'],
       scriptSrc: ["'self'", 'https://apis.google.com'],
       scriptSrcElem: ["'self'", 'unsafe-inline'],
-      'frame-src': ["'self'", '*'],
+      frameSrc: ["'self'", '*'],
     },
   })
 );
