@@ -61,27 +61,24 @@ app.use(
   })
 );
 
-app.use((req, res, next) => {
-  // Check if the request contains the 'cookie' header
-  if (req.headers.cookie) {
-    // Split the cookie string into individual cookies
-    const cookies = req.headers.cookie.split(';');
-    // Check each cookie to see if it starts with 'SID='
-    const isGoogleLoggedIn = cookies.some((cookie) =>
-      cookie.trim().startsWith('SID=')
-    );
-    // If the Google cookie is found, allow the user to continue
-    if (isGoogleLoggedIn) {
-      next(); // Proceed to the next middleware or route handler
-    } else {
-      // If the Google cookie is not found, redirect to Google account login page
-      res.redirect('https://accounts.google.com/');
-    }
+// Middleware to check if the user is logged into Google
+const checkGoogleLogin = (req, res, next) => {
+  // Check if the request contains the Google user session cookie or any other indication
+  // of being logged in to Google.
+  // You might need to check for specific cookies or other indicators depending on your setup.
+  const isLoggedIn = req.cookies['GOOGLE_SESSION_COOKIE'] !== undefined; // Example check, replace with your actual check
+
+  if (isLoggedIn) {
+    // If the user is logged in to Google, continue to the next middleware/route
+    next();
   } else {
-    // If the 'cookie' header is not present, redirect to Google account login page
+    // If not logged in to Google, redirect to Google sign-in page
     res.redirect('https://accounts.google.com/');
   }
-});
+};
+
+// Protected route that requires Google login
+app.get(checkGoogleLogin);
 
 app.use(cors());
 app.use(compression());
