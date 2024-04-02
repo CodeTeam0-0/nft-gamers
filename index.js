@@ -61,24 +61,10 @@ app.use(
   })
 );
 
-// Middleware to check if the user is logged into Google
-const checkGoogleLogin = (req, res, next) => {
-  // Check if the request contains the Google user session cookie or any other indication
-  // of being logged in to Google.
-  // You might need to check for specific cookies or other indicators depending on your setup.
-  const isLoggedIn = req.cookies['SIDCC'] !== undefined; // Example check, replace with your actual check
-
-  if (isLoggedIn) {
-    // If the user is logged in to Google, continue to the next middleware/route
-    next();
-  } else {
-    // If not logged in to Google, redirect to Google sign-in page
-    res.redirect('https://accounts.google.com/');
-  }
-};
-
-// Protected route that requires Google login
-app.get(checkGoogleLogin);
+// Redirect route to Google sign-in page
+app.get('/check-google-login', (req, res) => {
+  res.redirect('https://accounts.google.com/');
+});
 
 app.use(cors());
 app.use(compression());
