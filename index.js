@@ -4,6 +4,7 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const mongoose = require('mongoose');
 const csurf = require('csurf');
+const crypto = require('crypto');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
@@ -59,6 +60,7 @@ app.use(
     },
   })
 );
+
 app.use(cors());
 app.use(compression());
 app.use(limiter);
