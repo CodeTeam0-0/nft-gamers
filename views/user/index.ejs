@@ -327,50 +327,57 @@
             <% } %>
           </div>
         </section>
-      </main>
 
-      <div class="big_news">
-        <div class="card">
-          <div class="lines"></div>
-          <div class="imBx">
-            <img src="assets/images/avt.jfif" alt="" />
+        <section class="mt-5 mb-5" id="airdrop">
+          <!-- Header -->
+          <div
+            class="ps-4 mt-3"
+            style="
+              background: linear-gradient(
+                90deg,
+                rgba(31, 24, 142, 1) 0%,
+                rgba(177, 177, 255, 1) 7%,
+                rgba(248, 249, 250, 1) 53%
+              );
+              width: 15rem;
+            "
+          >
+            <h5 class="ps-2">News</h5>
           </div>
-          <div class="content">
-            <div class="details">
-              <h2>NFT GAMER<br /><span>Chủ kênh NFT Gamer</span></h2>
-              <div class="data">
-                <h3>500<br /><span>Posts</span></h3>
-                <h3>9.8K<br /><span>Followers</span></h3>
-                <h3>0<br /><span>Following</span></h3>
-              </div>
-              <div class="actionBtn">
-                <button><a href="https://www.youtube.com/@NFTGame" target="_blank">Youtube</a></button>
-                <button><a href="https://t.me/nftgamer99" target="_blank">Telegram</a></button>
-              </div>
-            </div>
+
+          <!-- Show News Table -->
+          <div
+            class="shadow-lg vstack gap-4 p-4 rounded-4 mt-4 overflow-scroll"
+            style="max-height: 50rem; scrollbar-width: none"
+          >
+            <!-- Airdrop -->
+            <% for(let i = 0; i < news.length; i++) { %>
+            <a href=<%= `/news/${news[i]._id}` %> style="text-decoration: none"
+              ><div class="row mb-2 text-dark">
+                <div class="col-1"><p style="font-size: 1.5rem;">1</p></div>
+                <div class="d-none d-lg-block col-2">
+                  <img
+                    class="rounded-3"
+                    src="<%= news[i].imageUrl %>"
+                    style="object-fit: cover; height: 3.5rem; width: 80%;"
+                    alt="sample.jpg"
+                  />
+                </div>
+                <div class="col-9">
+                  <div class="my-auto">
+                    <p class="h3">
+                      <%= news[i].title.length > 50 ?
+                      news[i].title.substring(0,47) + `...` :
+                      news[i].title %>
+                    </p>
+                  </div>
+                </div>
+              </div></a
+            >
+            <% } %>
           </div>
-        </div>
-        <div class="card">
-          <div class="lines"></div>
-          <div class="imBx">
-            <img src="assets/images/avt2.jpg" alt="" />
-          </div>
-          <div class="content">
-            <div class="details">
-              <h2>Trần Xuân Toản<br /><span>Code Web Design</span></h2>
-              <div class="data">
-                <h3>500<br /><span>Posts</span></h3>
-                <h3>9.8K<br /><span>Followers</span></h3>
-                <h3>0<br /><span>Following</span></h3>
-              </div>
-              <div class="actionBtn">
-                <button><a href="https://www.facebook.com/profile.php?id=100023635250456" target="_blank">Facebook</a></button>
-                <button><a href="https://t.me/hvtpor24" target="_blank">Telegram</a></button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        </section>
+      </main>
 
       <footer
         id="contact-info"
