@@ -160,10 +160,10 @@
                   <h2 class="mb-3">Game News</h2>
                   <% if(games[0]) { %>
                   <!-- News 1 -->
-                  <a class="d-block position-relative mb-4" href=<%= `/games/${games[0]._id}` %>>
+                  <a class="d-block position-relative mb-4" href=<%= `/game/${games[0]._id}` %>>
                     <img
                       class="w-100 rounded-4"
-                      src=<%= news[0].imageUrl  %>
+                      src=<%= games[0].imageUrl  %>
                       alt="Please login google to see images"
                     />
                     <div
