@@ -157,10 +157,10 @@
                   class="shadow-lg p-4 rounded-5 overflow-scroll"
                   style="max-height: 50rem; scrollbar-width: none"
                 >
-                  <h2 class="mb-3">Hot News</h2>
-                  <% if(news[0]) { %>
+                  <h2 class="mb-3">Game News</h2>
+                  <% if(games[0]) { %>
                   <!-- News 1 -->
-                  <a class="d-block position-relative mb-4" href=<%= `/news/${news[0]._id}` %>>
+                  <a class="d-block position-relative mb-4" href=<%= `/games/${games[0]._id}` %>>
                     <img
                       class="w-100 rounded-4"
                       src=<%= news[0].imageUrl  %>
@@ -170,15 +170,15 @@
                       class="w-100 position-absolute bottom-0 text-bg-light p-2 opacity-50"
                     >
                       <p class="text-info small">
-                        News Hot
+                        Games Hot
                         <span class="text-dark"
-                          >• <%= news[0]?.updatedAt.toLocaleDateString()
+                          >• <%= games[0]?.updatedAt.toLocaleDateString()
                           %></span
                         >
                       </p>
                       <p>
-                        <%= news[0]?.title.length > 10 ?
-                        news[0]?.title.substring(0, 7) + '...' : news[0]?.title
+                        <%= games[0]?.title.length > 10 ?
+                        games[0]?.title.substring(0, 7) + '...' : games[0]?.title
                         %>
                       </p>
                     </div>
@@ -186,21 +186,21 @@
                   <% } %>
 
                   <!-- more hot news -->
-                  <% for(let i = 1;i < news.length; i++) { %>
-                  <a href=<%= `/news/${news[i]._id}` %> class="mb-3" style="text-decoration: none">
+                  <% for(let i = 1;i < games.length; i++) { %>
+                  <a href=<%= `/games/${games[i]._id}` %> class="mb-3" style="text-decoration: none">
                     <div class="row">
                       <div class="col-8">
                         <p class="text-info">
-                          News Hot
+                          Game Hot
                           <span class="text-dark"
-                            >• <%= news[i]?.updatedAt.toLocaleDateString()
+                            >• <%= games[i]?.updatedAt.toLocaleDateString()
                             %></span
                           >
                         </p>
                         <p class="text-dark">
-                          <%= news[i]?.title.length > 10 ?
-                          news[i]?.title.substring(0, 7) + '...' :
-                          news[i]?.title %>
+                          <%= games[i]?.title.length > 10 ?
+                          games[i]?.title.substring(0, 7) + '...' :
+                          games[i]?.title %>
                         </p>
                       </div>
                       <div class="col-4">
