@@ -187,7 +187,7 @@
 
                   <!-- more hot news -->
                   <% for(let i = 1;i < games.length; i++) { %>
-                  <a href=<%= `/games/${games[i]._id}` %> class="mb-3" style="text-decoration: none">
+                  <a href=<%= `/game/${games[i]._id}` %> class="mb-3" style="text-decoration: none">
                     <div class="row">
                       <div class="col-8">
                         <p class="text-info">
@@ -207,7 +207,7 @@
                         <img
                           class="w-100 rounded-5 shadow-sm"
                           style="height: 6rem"
-                          src=<%= news[i].imageUrl %>
+                          src=<%= games[i].imageUrl %>
                           alt="Please login google to see images"
                         />
                       </div>
