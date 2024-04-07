@@ -262,6 +262,6 @@ a {
   .modal-dialog {
     top: 100px !important;
     width: 70% !important;
-    left: 70px !important;
+    left: 20% !important;
   }
 }
