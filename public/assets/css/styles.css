@@ -254,8 +254,9 @@ a {
 }
 
 @media screen and (min-width: 768px) {
-  .modal-dialog {
-    top: 40px;
-    width: 65%;
+  .modal.fade .modal-dialog {
+    top: 90px !important;
+    width: 65% !important;
+    left: 98px !important;
   }
 }
