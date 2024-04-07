@@ -260,8 +260,8 @@ a {
 
 @media screen and (max-width: 768px) {
   .modal-dialog {
-    top: 100px !important;
+    top: 25% !important;
     width: 70% !important;
-    left: 20% !important;
+    left: 15% !important;
   }
 }
