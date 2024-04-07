@@ -253,8 +253,13 @@ a {
   color: #000;
 }
 
+.modal-dialog {
+  top: 80px;
+  width: 28%;
+}
+
 @media screen and (min-width: 768px) {
-  .modal.fade .modal-dialog {
+  .modal-dialog {
     top: 90px !important;
     width: 65% !important;
     left: 98px !important;
