@@ -34,7 +34,7 @@ body {
   overflow: hidden;
 }
 .card .lines::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -58,7 +58,7 @@ body {
   }
 }
 .card .lines::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 3px;
   background: #292929;
@@ -80,7 +80,7 @@ body {
   height: 250px;
 }
 .card .imBx::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -105,7 +105,7 @@ body {
   }
 }
 .card .imBx::after {
-  content: "";
+  content: '';
   position: absolute;
   background: #292929;
   inset: 3px;
@@ -202,7 +202,7 @@ height: calc(100% -20px); */
   position: relative;
 }
 .footer-col h4::before {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   bottom: -10px;
@@ -251,4 +251,11 @@ height: calc(100% -20px); */
 a {
   text-decoration: none;
   color: #000;
+}
+
+@media screen and (min-width: 768px) {
+  .modal-dialog {
+    top: 40px;
+    width: 65%;
+  }
 }
