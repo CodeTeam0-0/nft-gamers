@@ -1,9 +1,29 @@
-const embed = require("@brightcrowd/embed-video");
+const embed = require('@brightcrowd/embed-video');
 
-const Game = require("../../models/games");
-const Airdrop = require("../../models/airdrops");
-const News = require("../../models/news");
-const User = require("../../models/user");
+const Game = require('../../models/games');
+const Airdrop = require('../../models/airdrops');
+const News = require('../../models/news');
+const User = require('../../models/user');
+
+function urlify(text) {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  return text.replace(urlRegex, function (url) {
+    return '<a href="' + url + '">' + url + '</a>';
+  });
+}
+
+function breakDown(str) {
+  const separateLines = str.split(/\r?\n|\r|\n/g);
+  return separateLines.join('<br>');
+}
+
+function textConverse(text) {
+  const urlText = urlify(text);
+
+  const breakDownText = breakDown(urlText);
+
+  return breakDownText;
+}
 
 exports.getHome = async function (req, res, next) {
   try {
@@ -14,7 +34,7 @@ exports.getHome = async function (req, res, next) {
     const user = await User.findOne();
     const bestNews = await News.findById(user.bestNews);
 
-    res.render("user/index", {
+    res.render('user/index', {
       airdrops,
       games,
       news,
@@ -30,15 +50,17 @@ exports.getDetailGame = async function (req, res, next) {
     const gameId = req.params.gameId;
     const game = await Game.findById(gameId);
 
-    const videoEmbed = embed(game.youtubeLink);
-
     if (!game) {
-      return res.redirect("/");
+      return res.redirect('/');
     }
 
-    return res.render("user/detail", {
-      title: "Game Details",
-      page: "gameDetail",
+    const videoEmbed = embed(game.youtubeLink);
+
+    game.description = textConverse(game.description);
+
+    return res.render('user/detail', {
+      title: 'Game Details',
+      page: 'gameDetail',
       airdrop: {},
       game,
       videoEmbed,
@@ -54,15 +76,17 @@ exports.getDetailAirdrop = async function (req, res, next) {
     const airdropId = req.params.airdropId;
     const airdrop = await Airdrop.findById(airdropId);
 
-    const videoEmbed = embed(airdrop.youtubeLink);
-
     if (!airdrop) {
-      return res.redirect("/");
+      return res.redirect('/');
     }
 
-    return res.render("user/detail", {
-      title: "Airdrop Details",
-      page: "airdropDetail",
+    const videoEmbed = embed(airdrop.youtubeLink);
+
+    airdrop.description = textConverse(airdrop.description);
+
+    return res.render('user/detail', {
+      title: 'Airdrop Details',
+      page: 'airdropDetail',
       airdrop,
       videoEmbed,
       game: {},
@@ -79,15 +103,17 @@ exports.getDetailNews = async function (req, res, next) {
     const news = await News.findById(newsId);
 
     if (!news) {
-      return res.redirect("/");
+      return res.redirect('/');
     }
 
-    return res.render("user/detail", {
-      title: "News Details",
-      page: "newsDetail",
+    news.description = textConverse(news.description);
+
+    return res.render('user/detail', {
+      title: 'News Details',
+      page: 'newsDetail',
       airdrop: {},
       game: {},
-      videoEmbed: "",
+      videoEmbed: '',
       news,
     });
   } catch (err) {
