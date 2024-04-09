@@ -9,6 +9,7 @@
       rel="stylesheet"
       href="/assets/css/animate.min.css"
     />
+    <a href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"></a>
     <link rel="stylesheet" href="/assets/css/all.min.css">
     <link rel="stylesheet" href="/assets/css/styles.css" />
 
@@ -362,7 +363,7 @@
             <% for(let i = news.length - 1; i >= 0; i--) { %>
             <a href=<%= `/news/${news[i]._id}` %> style="text-decoration: none"
               ><div class="row mb-2 text-dark">
-                <div class="col-1"><p style="font-size: 1.5rem;">1</p></div>
+                <div class="col-1"><p style="font-size: 1.5rem;"><i class="fa-solid fa-period"></i></p></div>
                 <div class="d-none d-lg-block col-2">
                   <img
                     class="rounded-3"
@@ -422,10 +423,10 @@
             <div class="footer-col">
               <h4>follow us</h4>
               <div class="social-links">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
               </div>
             </div>
           </div>
