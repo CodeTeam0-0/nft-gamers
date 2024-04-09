@@ -358,8 +358,8 @@
             class="shadow-lg vstack gap-4 p-4 rounded-4 mt-4 overflow-scroll"
             style="max-height: 50rem; scrollbar-width: none"
           >
-            <!-- Airdrop -->
-            <% for(let i = 0; i < news.length; i++) { %>
+            <!-- News -->
+            <% for(let i = news.length - 1; i >= 0; i--) { %>
             <a href=<%= `/news/${news[i]._id}` %> style="text-decoration: none"
               ><div class="row mb-2 text-dark">
                 <div class="col-1"><p style="font-size: 1.5rem;">1</p></div>
