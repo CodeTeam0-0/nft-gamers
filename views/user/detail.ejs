@@ -35,8 +35,14 @@
     </nav>
     <div class="container mt-5">
       <% if(page === 'gameDetail' ) { %>
-      <!-- Video Embed -->
-      <%- videoEmbed %>
+      <img
+        class="w-100 rounded-5 shadow-sm"
+        style="height: 6rem"
+        src="<%"
+        ="games[i].imageUrl"
+        %
+      />
+      alt="Please login google to see images" />
       <a href="<%= game.coinLink %>" class="btn btn-outline-dark"
         >Click here to learn more about the coin</a
       >
