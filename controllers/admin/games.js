@@ -106,18 +106,31 @@ exports.postEditGame = async function (req, res, next) {
     const coinLink = req.body.coinLink;
     const like = req.body.like;
 
-    embed.image(youtubeLink, { image: 'maxresdefault' }, async (err, data) => {
+    if (matchYoutubeUrl(youtubeLink)) {
+      embed.image(
+        youtubeLink,
+        { image: 'maxresdefault' },
+        async (err, data) => {
+          game.title = title;
+          game.description = description;
+          game.youtubeLink = youtubeLink;
+          game.coinLink = coinLink;
+          game.like = like;
+          game.imageUrl = data.src;
+        }
+      );
+    } else {
       game.title = title;
       game.description = description;
       game.youtubeLink = youtubeLink;
       game.coinLink = coinLink;
       game.like = like;
-      game.imageUrl = data.src;
+      game.imageUrl = youtubeLink;
 
       await game.save();
 
       return res.redirect('/admin/games-manage');
-    });
+    }
   } catch (err) {
     next(err);
   }
